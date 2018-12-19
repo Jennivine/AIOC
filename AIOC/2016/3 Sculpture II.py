@@ -16,7 +16,7 @@
 # existing object) and mark that as the last index.
 #
 # When we place a new block, it either fits "within" the parent block or it "overhangs"
-# it. Iff the latter, we need to update the effective_t2 all the way back to the
+# it. If the latter, we need to update the effective_t2 all the way back to the
 # beginning.
 #
 # There is no "root" block. If the twentieth block lands on the ground, then it was not
