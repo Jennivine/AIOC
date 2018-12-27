@@ -56,6 +56,11 @@ int main() {
         printf("%d\n", largestS.second);
         largestS.first -= request;
         largestS.second += request;
-        pq.push(largestS);
+        
+        if (largestS.first != 0) {
+            pq.push(largestS);
+        }
     }
+    
+    return 0;
 }
