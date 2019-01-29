@@ -65,6 +65,7 @@ int main() {
 			checked[i] = 0;
 		}
 	}
+
 	printf("%d\n", lo);
 }
 
