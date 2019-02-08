@@ -3,9 +3,9 @@ using namespace std;
 
 int N,K; // length of chocolate bar & number of people in team
 int chocolate[1000005];
-int sum;
+long long sum;
 
-int decision (int x);
+int decision (long long x); // returns 0 or 1
 
 int main() {
 	freopen("choc.in","r",stdin);
@@ -20,10 +20,9 @@ int main() {
 		sum += tastiness;
 	}
 
-	int lo = 0; //minimum tastiness will always be >= to 1
-	int hi = 1e9; //minimum tastiness cannot be larger than mean+1
-	int mid = (lo+hi)/2;
-
+	long long lo = 0; //minimum tastiness will always be >= to 1
+	long long hi = 1e11+1; //minimum tastiness cannot be larger than mean+1
+	long long mid = (lo+hi)/2;
 
 	//int ans = decision(15);
 	//printf("%d\n", ans);
@@ -39,15 +38,15 @@ int main() {
 		}
 	}
 
-	printf("%d\n", lo-1);
+	printf("%lld\n", lo-1);
 
 }
 
-int decision (int x) {
+int decision (long long x) {
 	//returns 1 if minimum tastiness can be >= x, zero otherwise
-	int buffer = 0;
-	int index = 0;
-	int ans = 0;
+	long long buffer = 0;
+	long long index = 0;
+	long long ans = 0;
 
 	while (index < N) {
 		buffer += chocolate[index];
