@@ -1,0 +1,55 @@
+colour: 1
+compatible with: 1
+at index: 0
+at index: 1
+at index: 2
+at index: 5
+compatible with: 2
+at index: 3
+at index: 4
+1
+
+colour: 1
+compatible with: 1
+at index: 0
+at index: 1
+at index: 2
+at index: 5
+compatible with: 2
+at index: 3
+at index: 4
+2
+
+colour: 2
+compatible with: 1
+at index: 0
+at index: 1
+at index: 2
+at index: 5
+compatible with: 2
+at index: 3
+at index: 4
+4
+
+colour: 2
+compatible with: 1
+at index: 0
+at index: 1
+at index: 2
+at index: 5
+compatible with: 2
+at index: 3
+at index: 4
+8
+
+colour: 1
+compatible with: 1
+at index: 0
+at index: 1
+at index: 2
+at index: 5
+compatible with: 2
+at index: 3
+at index: 4
+16
+
