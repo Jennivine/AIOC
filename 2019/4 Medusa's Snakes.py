@@ -55,8 +55,9 @@ while (lo != hi):
         hi = mid
 
 if possible(hair, mid) == False:
-    #in case of overshot 
+    #in case of overshot
     mid -= 1
+    mid = max(0, mid)
 
 #output
 with open("snakeout.txt", "w") as o:
