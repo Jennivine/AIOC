@@ -1,44 +1,25 @@
-f = open("phonein.txt")
-lines = int(f.readline().strip())
+#read in data
+with open("phonein.txt") as f:
+	T = []
 
-ans = 0
-position = []
+	lines = int(f.readline().strip())
+	for i in range(lines-1):
+		T.append(map(int, f.readline().strip().split(" ")))
+	T.append([0, int(f.readline().strip()), 0])
 
-for i in xrange(lines-2):
-	a,b,c = map(int, f.readline().strip().split())
-	if i == 0:
-		ans = min(a, b+c)
-		if ans == a:
-			position.append("r")
-		else:
-			position.append("l")
-	else:
-		if position[-1] == "l":
-			temp = min(a,b+c)
-			ans += temp
-			if temp == a:
-				position.append("r")
-			else:
-				position.append("l")
-		else:
-			temp = min(a+b, c)
-			ans += temp
-			if temp == a+b:
-				position.append("r")
-			else:
-				position.append("l")
 
-a,b,c = map(int, f.readline().strip().split())
-d = int(f.readline().strip())
+#initialise dp table
+V = [[0 for j in range(2)] for i in range(lines)]
+V[0][1] = T[0][1]
 
-if position[-1] == "l":
-	ans += min(a, b+c+d)
-else:
-	ans += min(a+b, c+d)
+for i in range(1, lines):
+        V[i][0] = min(V[i-1][0] + T[i-1][0] + T[i][1],
+                      V[i-1][1] + T[i-1][2])
 
-o = open("phoneout.txt","w")
-o.write(str(ans)+"\n")
+        V[i][1] = min(V[i-1][1] + T[i-1][2] + T[i][1],
+                      V[i-1][0] + T[i-1][0])
 
-f.close()
-o.close()
+ans = V[lines-1][1]
 
+with open("phoneout.txt", "w") as o:
+        o.write(str(ans))
