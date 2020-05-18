@@ -1,65 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct compare
-{
-    bool operator()(pair<int, int> p1,pair<int,int> p2) {
-        if(p1.first == p2.first)
-            return p1.second > p2.second;
-        else
-            return p1.first < p2.first;    // ***EDIT***
-    }
+struct Range {
+	int l, r, size;
+
+	friend bool operator < (Range a, Range b) {
+		return a.size < b.size || (a.size == b.size && a.l > b.l);	
+	}
+
+	friend bool operator > (Range a, Range b) {
+		return a.size > b.size || (a.size == b.size && a.l < b.l);
+	}
 };
 
-priority_queue<pair<int, int>, vector<pair<int, int> >, compare> pq;
+priority_queue<Range> pq;
 
 int n, t, b;
-int initB[30005];
-
-void print_queue(priority_queue<pair<int, int>, vector<pair<int, int> >, compare> pq) {
-    while (not pq.empty()){
-        printf("%d,%d\n",pq.top().first,pq.top().second);
-        pq.pop();
-    }
-}
+int T[30005], B[30005];
 
 int main() {
     freopen("aflin.txt","r",stdin);
     freopen("aflout.txt","w",stdout);
     
-    //Implement own queue that sorts max of first element
-    // and min of second element in pair
-    
     scanf("%d", &n);
-    scanf("%d", &t);
+	scanf("%d", &t);
     
-    int leftMost = 1;
-    for (int i=0; i<t; i++){
-        int taken;
-        scanf("%d", &taken);
-        //printf("%d\n", taken);
-        pq.push(make_pair(taken-leftMost, leftMost));
-        leftMost = taken+1;
-    }
-    pq.push(make_pair(n-leftMost+1,leftMost));
-    
-    //print_queue(pq);
- 
-    scanf("%d", &b);
-    
-    for (int i=0; i<b; i++){
+	for (int i=1; i<=t; i++) 
+		scanf("%d", &T[i]);
+
+	// process already taken seats and form the priority queue
+	T[++t] = n+1;
+	sort(T+1, T+t+1); //inputs are not necessarily in order
+	for (int i=1; i<=t; i++) {
+		if (T[i] - T[i-1] > 1) {
+			pq.push( (Range){T[i-1]+1, T[i]-1, T[i]-T[i-1]-1} );
+		}
+	}
+
+	scanf("%d", &b);
+
+    for (int i=1; i<=b; i++) {
         int request;
         scanf("%d", &request);
-        //printf("%d\n", request);
-        pair<int, int> largestS = pq.top();
-        pq.pop();
-        printf("%d\n", largestS.second);
-        largestS.first -= request;
-        largestS.second += request;
         
-        if (largestS.first != 0) {
+        auto largestS = pq.top();
+        pq.pop();
+
+        printf("%d\n", largestS.l);
+        
+		largestS.size -= request;
+        largestS.l += request;
+        
+        if (largestS.size != 0)
             pq.push(largestS);
-        }
     }
     
     return 0;
