@@ -5,6 +5,8 @@ int n,k;
 int photos[100005];
 int a[100005];
 
+int subtaskTwo(int s, int f);
+
 int main() {
     scanf("%d %d", &n, &k);
     for (int i=0; i<n; i++) {
@@ -27,17 +29,26 @@ int main() {
         }
     }
 
-    printf("%d\n", s1); */
+    printf("%d\n", s1);
+
+	*/
 
     //subtask 2:
-    a[0] = photos[0];
+	int runMax = 0;
+	for (int i=0; i<5; i++) {
+		runMax = max(runMax, subtaskTwo(i, i+(n-5)));
+	}
+    printf("%d\n", runMax);
+}
+
+int subtaskTwo(int start, int finish) {
+    a[0] = photos[start];
     int runMax = a[0];
-    for (int i=1; i<n; i++) {
-        a[i] = max(photos[i],  a[i-1]+photos[i]);
+    for (int i=1; i<n-5; i++) {
+        a[i] = max(photos[start+i],  a[i-1]+photos[start+i]);
         if (a[i] > runMax) {
             runMax = a[i];
         }
     }
-    printf("%d\n", runMax);
+	return runMax;
 }
-

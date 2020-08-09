@@ -6,7 +6,7 @@ typedef pair<int, int> pii;
 int N, E, X, K;
 vector<int> adjList[100005];
 
-int canVisit[100005];
+int visited[100005];
 int ans;
 
 void DFS(int start, int movesLeft);
@@ -30,15 +30,14 @@ int main() {
 }
 
 void DFS(int start, int movesLeft) {
-	if (movesLeft == 0) {
-		if (! canVisit[start]) {
-			canVisit[start] = 1;
-			ans++;
-		}
-		return;
+	visited[start] = 1;
+
+	if (movesLeft %2 == 0) { 
+		ans++;
 	}
 
 	for (auto i: adjList[start]) {
-		DFS(i, movesLeft-1);
+		if (!visited[i]) 
+			DFS(i, movesLeft-1);
 	}
 }

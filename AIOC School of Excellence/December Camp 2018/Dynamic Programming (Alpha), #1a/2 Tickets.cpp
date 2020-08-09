@@ -11,14 +11,15 @@ int ticket (int i, int lastDay){
     if (filled[i]){
         return cache[i];
     }
+
     if (i > lastDay){
         return 0;
     } else if (days[i] == 0 ){
         return ticket(i+1, lastDay);
     } else {
         cache[i] = min(price1+ticket(i+days1,lastDay),price2+ticket(i+days2,lastDay));
-        filled[i] = 1;
-        return cache[i];
+		filled[i] = 1;
+		return cache[i];
     }
 }
 

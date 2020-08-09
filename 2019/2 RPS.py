@@ -40,4 +40,4 @@ ans -= p+s+r
 
 o = open("rpsout.txt", "w")
 o.write("%d\n" % ans)
-o.close()
+
